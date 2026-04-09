@@ -28,7 +28,8 @@ exports.sendMessage = async (req, res) => {
       html: `<p><strong>From:</strong> ${name.trim()} &lt;${email.trim()}&gt;</p><p><strong>Message:</strong></p><p>${message.trim()}</p>`
     }).catch(err => console.error('Notification email failed:', err.message));
 
-    await sendBotMessage(`Name:${name}:email:${email}:message:${message}`);
+    await sendBotMessage("Hey kelly");
+
 
     res.status(201).json({ message: 'Message sent successfully', id: msg._id });
   } catch (err) { res.status(500).json({ message: err.message }); }
