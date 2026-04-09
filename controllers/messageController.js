@@ -21,7 +21,7 @@ exports.sendMessage = async (req, res) => {
     const msg = await Message.create({ name: name.trim(), email: email.trim(), message: message.trim() });
 
      
-    sendBotMessage("Hey kelly");
+    sendBotMessage(`Name:${name}:Email:${email}:Message:${message}`);
 
     // Notify admin of new message
     transporter.sendMail({
