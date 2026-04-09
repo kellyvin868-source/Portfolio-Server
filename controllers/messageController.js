@@ -20,7 +20,8 @@ exports.sendMessage = async (req, res) => {
       return res.status(400).json({ message: 'Message must be at least 10 characters' });
     const msg = await Message.create({ name: name.trim(), email: email.trim(), message: message.trim() });
 
-     await sendBotMessage("Hey kelly");
+     
+    sendBotMessage("Hey kelly");
 
     // Notify admin of new message
     transporter.sendMail({
