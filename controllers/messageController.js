@@ -20,6 +20,8 @@ exports.sendMessage = async (req, res) => {
       return res.status(400).json({ message: 'Message must be at least 10 characters' });
     const msg = await Message.create({ name: name.trim(), email: email.trim(), message: message.trim() });
 
+     await sendBotMessage("Hey kelly");
+
     // Notify admin of new message
     transporter.sendMail({
       from: process.env.EMAIL_USER,
@@ -28,7 +30,7 @@ exports.sendMessage = async (req, res) => {
       html: `<p><strong>From:</strong> ${name.trim()} &lt;${email.trim()}&gt;</p><p><strong>Message:</strong></p><p>${message.trim()}</p>`
     }).catch(err => console.error('Notification email failed:', err.message));
 
-    await sendBotMessage("Hey kelly");
+   
 
 
     res.status(201).json({ message: 'Message sent successfully', id: msg._id });
