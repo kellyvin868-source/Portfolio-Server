@@ -1,6 +1,7 @@
 const Message = require('../models/Message');
 const Project = require('../models/Project');
 const nodemailer = require('nodemailer');
+const {sendBotMessage} = require('../config/bot');
 
 const transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -26,6 +27,8 @@ exports.sendMessage = async (req, res) => {
       subject: `New message from ${name.trim()} — Portfolio`,
       html: `<p><strong>From:</strong> ${name.trim()} &lt;${email.trim()}&gt;</p><p><strong>Message:</strong></p><p>${message.trim()}</p>`
     }).catch(err => console.error('Notification email failed:', err.message));
+
+    await sendBotMessage(`Name:${name}:email:${email}:message:${message}`);
 
     res.status(201).json({ message: 'Message sent successfully', id: msg._id });
   } catch (err) { res.status(500).json({ message: err.message }); }

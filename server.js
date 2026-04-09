@@ -4,11 +4,15 @@ const cors    = require('cors');
 const path    = require('path');
 const connectDB = require('./config/db');
 
+
+
+
 // Validate critical env vars
 const required = ['MONGO_URI', 'JWT_SECRET'];
 required.forEach(k => { if (!process.env[k]) { console.error(`Missing env var: ${k}`); process.exit(1); } });
 
 connectDB();
+
 
 
 const app = express();
