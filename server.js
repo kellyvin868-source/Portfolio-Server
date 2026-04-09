@@ -14,7 +14,7 @@ connectDB();
 const app = express();
 app.use(cors({
   origin: process.env.NODE_ENV === 'production'
-    ? process.env.CLIENT_URL || true
+    ? [process.env.CLIENT_URL, /\.vercel\.app$/, /\.onrender\.com$/].filter(Boolean)
     : 'http://localhost:5173',
   credentials: true
 }));
